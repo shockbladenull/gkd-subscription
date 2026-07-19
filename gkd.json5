@@ -1,0 +1,40 @@
+// 根据 GKD 快照生成
+// 包名：com.miui.systemAdSolution
+// 目标节点：vid=view_skip_button，文本以“跳过广告”开头，节点可见且可点击。
+// 静态快照中选择器唯一命中；实际自动点击效果待下一次广告出现时验证。
+
+{
+  id: 1864279031,
+  name: 'shockbladenull 的 GKD 订阅',
+  version: 1,
+  author: 'shockbladenull',
+  updateUrl:
+    'https://raw.githubusercontent.com/shockbladenull/gkd-subscription/main/gkd.json5',
+  checkUpdateUrl: './gkd.version.json5',
+  supportUri: 'https://github.com/shockbladenull/gkd-subscription',
+  categories: [],
+  globalGroups: [],
+  apps: [
+    {
+      id: 'com.miui.systemAdSolution',
+      name: '智能服务',
+      groups: [
+        {
+          key: 0,
+          name: '开屏广告（待实机验证）',
+          matchTime: 10000,
+          actionMaximum: 1,
+          resetMatch: 'app',
+          matchRoot: true,
+          rules: [
+            {
+              key: 0,
+              matches:
+                '[vid="view_skip_button"][text^="跳过广告"][clickable=true][visibleToUser=true]',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
