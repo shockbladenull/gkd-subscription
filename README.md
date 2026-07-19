@@ -52,6 +52,27 @@ Button[text="关闭"][clickable=true][visibleToUser=true]
 - 两个选择器均能在手机当前实时界面查询成功；
 - 完整规则能够将 `Button：关闭` 选为最终操作节点。
 
+### 淘宝：签到并领取元宝
+
+该规则按顺序执行两步：
+
+1. 点击“立即签到”；
+2. 在第一步执行后，点击“+任意数量元宝，点击领取”。
+
+第一步选择器：
+
+```text
+Button[text="立即签到"][clickable=true][visibleToUser=true]
+```
+
+第二步选择器：
+
+```text
+Button[text$="元宝，点击领取"][clickable=true][visibleToUser=true]
+```
+
+第二步通过 `preKeys: [10]` 要求第一步刚刚执行过，避免脱离上下文单独点击领取按钮。两个页面状态的选择器均已在对应静态快照中成功命中正确按钮；完整自动点击链路尚待下一次签到机会实机验证。
+
 ## 在 GKD 中添加
 
 1. 打开 GKD 的“订阅”页面。
