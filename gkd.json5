@@ -1,10 +1,10 @@
 // 自用 GKD 订阅
-// 已包含小米智能服务开屏广告和淘宝购物红包弹窗规则。
+// 已包含小米智能服务开屏广告、淘宝购物红包弹窗和淘宝签到领取元宝规则。
 
 {
   id: 1864279031,
   name: 'shockbladenull 的 GKD 订阅',
-  version: 3,
+  version: 4,
   author: 'shockbladenull',
   updateUrl:
     'https://raw.githubusercontent.com/shockbladenull/gkd-subscription/main/gkd.json5',
@@ -55,6 +55,37 @@
                 'Button[text="关闭"][clickable=true][visibleToUser=true]',
               ],
               action: 'click',
+            },
+          ],
+        },
+        {
+          key: 2,
+          name: '签到并领取元宝',
+          activityIds: [
+            'com.taobao.themis.container.app.TMSActivity',
+          ],
+          matchRoot: true,
+          forcedTime: 10000,
+          matchTime: 12000,
+          resetMatch: 'app',
+          rules: [
+            {
+              key: 10,
+              name: '立即签到',
+              matches:
+                'Button[text="立即签到"][clickable=true][visibleToUser=true]',
+              action: 'click',
+              actionMaximum: 1,
+            },
+            {
+              key: 11,
+              name: '领取签到元宝',
+              preKeys: [10],
+              matches:
+                'Button[text$="元宝，点击领取"][clickable=true][visibleToUser=true]',
+              actionDelay: 500,
+              action: 'click',
+              actionMaximum: 1,
             },
           ],
         },
