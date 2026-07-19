@@ -1,12 +1,10 @@
-// 根据 GKD 快照生成
-// 包名：com.miui.systemAdSolution
-// 目标节点：vid=view_skip_button，文本以“跳过广告”开头，节点可见且可点击。
-// 已完成实机验证：GKD 能够自动命中并点击该节点。
+// 自用 GKD 订阅
+// 已包含小米智能服务开屏广告和淘宝购物红包弹窗规则。
 
 {
   id: 1864279031,
   name: 'shockbladenull 的 GKD 订阅',
-  version: 2,
+  version: 3,
   author: 'shockbladenull',
   updateUrl:
     'https://raw.githubusercontent.com/shockbladenull/gkd-subscription/main/gkd.json5',
@@ -31,6 +29,32 @@
               key: 0,
               matches:
                 '[vid="view_skip_button"][text^="跳过广告"][clickable=true][visibleToUser=true]',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.taobao.taobao',
+      name: '淘宝',
+      groups: [
+        {
+          key: 1,
+          name: '关闭购物红包弹窗',
+          activityIds: [
+            'com.taobao.themis.container.app.TMSActivity',
+          ],
+          matchRoot: true,
+          resetMatch: 'activity',
+          actionMaximum: 1,
+          rules: [
+            {
+              key: 0,
+              matches: [
+                'TextView[text*="购物红包"][visibleToUser=true]',
+                'Button[text="关闭"][clickable=true][visibleToUser=true]',
+              ],
+              action: 'click',
             },
           ],
         },
