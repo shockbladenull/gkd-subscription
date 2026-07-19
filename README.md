@@ -18,26 +18,46 @@ https://fastly.jsdelivr.net/gh/shockbladenull/gkd-subscription@main/gkd.json5
 
 ## 当前规则
 
-### 智能服务
+### 智能服务：开屏广告
 
 - 包名：`com.miui.systemAdSolution`
-- 规则组：`开屏广告`
 - 选择器：
 
 ```text
 [vid="view_skip_button"][text^="跳过广告"][clickable=true][visibleToUser=true]
 ```
 
-该选择器已经在静态快照中唯一命中右上角的“跳过广告”节点，并已完成实机验证：GKD 能够自动触发并点击目标节点。
+该规则已完成实机验证：GKD 能够自动命中并点击右上角的跳过按钮。
 
-规则使用 `matchRoot: true`，并将匹配时间限制为进入应用后的 10 秒；每次进入应用最多执行一次。
+### 淘宝：关闭购物红包弹窗
+
+- 包名：`com.taobao.taobao`
+- Activity：`com.taobao.themis.container.app.TMSActivity`
+- 上下文选择器：
+
+```text
+TextView[text*="购物红包"][visibleToUser=true]
+```
+
+- 点击目标：
+
+```text
+Button[text="关闭"][clickable=true][visibleToUser=true]
+```
+
+完整规则使用 `matches` 数组：只有“购物红包”标题和可点击的“关闭”按钮同时存在时，才点击最后一个选择器对应的关闭按钮。
+
+该规则已经完成以下验证：
+
+- 两个选择器均能在手机当前实时界面查询成功；
+- 完整规则能够将 `Button：关闭` 选为最终操作节点。
 
 ## 在 GKD 中添加
 
 1. 打开 GKD 的“订阅”页面。
 2. 点击右下角的 `+`。
 3. 粘贴 Raw GitHub 或 jsDelivr 订阅地址。
-4. 添加后确认“智能服务 → 开屏广告”已启用。
+4. 添加后启用所需规则组。
 
 ## 更新规则
 
