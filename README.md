@@ -96,7 +96,9 @@ TextView[text="屏蔽广告"][visibleToUser=true]
 TextView[text="相似内容过多"][visibleToUser=true]
 ```
 
-两个目标节点自身均为 `clickable=false`，因此规则使用 `clickCenter` 点击节点中心。第二步通过 `preKeys: [20]` 要求第一步刚刚执行过。两个页面状态均已通过对应静态快照验证；完整连续动作尚待实机触发验证。
+两个目标节点自身均为 `clickable=false`，因此规则使用 `clickCenter` 点击节点中心。第二步通过 `preKeys: [20]` 要求第一步刚刚执行过。
+
+v5 已完成实机连续动作验证，但同一 Activity 的状态刷新会反复重置执行次数，造成两步动作重复触发。v6 将 `resetMatch` 改为 `match`，并在“屏蔽广告”面板出现时通过 `excludeMatches` 阻止再次点击入口，从而避免循环触发。
 
 ## 在 GKD 中添加
 
