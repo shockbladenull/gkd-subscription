@@ -4,7 +4,7 @@
 {
   id: 1864279031,
   name: 'shockbladenull 的 GKD 订阅',
-  version: 5,
+  version: 6,
   author: 'shockbladenull',
   updateUrl:
     'https://raw.githubusercontent.com/shockbladenull/gkd-subscription/main/gkd.json5',
@@ -104,14 +104,15 @@
           matchRoot: true,
           forcedTime: 6000,
           matchTime: 8000,
-          actionMaximum: 2,
-          resetMatch: 'activity',
+          resetMatch: 'match',
           rules: [
             {
               key: 20,
               name: '打开广告屏蔽菜单',
               matches:
                 'View[desc="dislike"][visibleToUser=true]',
+              excludeMatches:
+                'TextView[text="屏蔽广告"][visibleToUser=true]',
               action: 'clickCenter',
               actionMaximum: 1,
             },
