@@ -73,6 +73,31 @@ Button[text$="元宝，点击领取"][clickable=true][visibleToUser=true]
 
 第二步通过 `preKeys: [10]` 要求第一步刚刚执行过，避免脱离上下文单独点击领取按钮。两个页面状态的选择器均已在对应静态快照中成功命中正确按钮；完整自动点击链路尚待下一次签到机会实机验证。
 
+### 哔哩哔哩：屏蔽信息流广告
+
+- 包名：`tv.danmaku.bili`
+- Activity：`com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity`
+
+该规则按顺序执行两步：
+
+1. 点击广告卡片右侧的“不喜欢”入口；
+2. 在“屏蔽广告”面板中点击“相似内容过多”。
+
+第一步选择器：
+
+```text
+View[desc="dislike"][visibleToUser=true]
+```
+
+第二步上下文和目标：
+
+```text
+TextView[text="屏蔽广告"][visibleToUser=true]
+TextView[text="相似内容过多"][visibleToUser=true]
+```
+
+两个目标节点自身均为 `clickable=false`，因此规则使用 `clickCenter` 点击节点中心。第二步通过 `preKeys: [20]` 要求第一步刚刚执行过。两个页面状态均已通过对应静态快照验证；完整连续动作尚待实机触发验证。
+
 ## 在 GKD 中添加
 
 1. 打开 GKD 的“订阅”页面。
