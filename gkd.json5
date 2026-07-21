@@ -1,10 +1,10 @@
 // 自用 GKD 订阅
-// 已包含小米智能服务开屏广告、淘宝购物红包弹窗和淘宝签到领取元宝规则。
+// 已包含小米智能服务开屏广告、淘宝购物红包弹窗、淘宝签到领取元宝和哔哩哔哩信息流广告屏蔽规则。
 
 {
   id: 1864279031,
   name: 'shockbladenull 的 GKD 订阅',
-  version: 4,
+  version: 5,
   author: 'shockbladenull',
   updateUrl:
     'https://raw.githubusercontent.com/shockbladenull/gkd-subscription/main/gkd.json5',
@@ -85,6 +85,46 @@
                 'Button[text$="元宝，点击领取"][clickable=true][visibleToUser=true]',
               actionDelay: 500,
               action: 'click',
+              actionMaximum: 1,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'tv.danmaku.bili',
+      name: '哔哩哔哩',
+      groups: [
+        {
+          key: 3,
+          name: '屏蔽信息流广告',
+          activityIds: [
+            'com.bilibili.ship.theseus.detail.UnitedBizDetailsActivity',
+          ],
+          matchRoot: true,
+          forcedTime: 6000,
+          matchTime: 8000,
+          actionMaximum: 2,
+          resetMatch: 'activity',
+          rules: [
+            {
+              key: 20,
+              name: '打开广告屏蔽菜单',
+              matches:
+                'View[desc="dislike"][visibleToUser=true]',
+              action: 'clickCenter',
+              actionMaximum: 1,
+            },
+            {
+              key: 21,
+              name: '选择相似内容过多',
+              preKeys: [20],
+              matches: [
+                'TextView[text="屏蔽广告"][visibleToUser=true]',
+                'TextView[text="相似内容过多"][visibleToUser=true]',
+              ],
+              actionDelay: 300,
+              action: 'clickCenter',
               actionMaximum: 1,
             },
           ],
